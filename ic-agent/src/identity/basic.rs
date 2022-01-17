@@ -1,8 +1,10 @@
+#[cfg(feature = "wasm")]
 use crate::{export::Principal, Identity, Signature};
 
 #[cfg(all(feature = "pem", feature = "std"))]
 use crate::identity::error::PemError;
 
+#[cfg(feature = "wasm")]
 use ring::signature::{Ed25519KeyPair, KeyPair};
 use simple_asn1::{
     oid, to_der,
@@ -10,11 +12,13 @@ use simple_asn1::{
 };
 
 /// A Basic Identity which sign using an ED25519 key pair.
+#[cfg(feature = "wasm")]
 pub struct BasicIdentity {
     key_pair: Ed25519KeyPair,
     der_encoded_public_key: Vec<u8>,
 }
 
+#[cfg(feature = "wasm")]
 impl BasicIdentity {
     /// Create a BasicIdentity from reading a PEM file at the path.
     #[cfg(all(feature = "pem", feature = "std"))]
@@ -45,6 +49,7 @@ impl BasicIdentity {
     }
 }
 
+#[cfg(feature = "wasm")]
 impl Identity for BasicIdentity {
     fn sender(&self) -> Result<Principal, String> {
         Ok(Principal::self_authenticating(&self.der_encoded_public_key))

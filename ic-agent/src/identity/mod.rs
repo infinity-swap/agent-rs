@@ -10,6 +10,7 @@ pub(crate) mod secp256k1;
 pub(crate) mod error;
 
 pub use anonymous::AnonymousIdentity;
+#[cfg(feature = "wasm")]
 pub use basic::BasicIdentity;
 #[cfg(feature = "std")]
 pub use secp256k1::Secp256k1Identity;

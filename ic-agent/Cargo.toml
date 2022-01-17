@@ -27,7 +27,7 @@ mime = "0.3.16"
 openssl = { version = "0.10.38", optional = true }
 rand = { version = "0.8.4", optional = true }
 rustls = { version = "0.20.2", optional = true }
-ring = { version = "0.16.11", default-features = false, features = ["alloc"] }
+ring = { version = "0.16.11", optional = true, default-features = false, features = ["alloc"] }
 serde = { version = "1.0.133", features = ["derive"] }
 serde_bytes = "0.11.2"
 serde_cbor = "0.11.2"
@@ -55,4 +55,5 @@ tokio = { version = "1.15.0", features = ["full"] }
 [features]
 default = ["pem", "std"]
 ic_ref_tests = ["default"] # Used to separate integration tests for ic-ref which need a server running.
-std = ["hyper-rustls", "openssl", "rand", "rustls", "reqwest", "ring/std"]
+std = ["hyper-rustls", "openssl", "rand", "rustls", "reqwest", "ring/std", "wasm"]
+wasm = ["ring"]
