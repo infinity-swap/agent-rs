@@ -1,5 +1,6 @@
 pub mod agent_error;
 pub mod replica_api;
+pub mod response;
 pub mod signed;
 
 use crate::{
@@ -9,6 +10,8 @@ use crate::{
     request_id::{to_request_id, RequestId},
 };
 pub use agent_error::AgentError;
+pub use response::{Replied, RequestStatusResponse};
+
 use std::time::Duration;
 
 const IC_REQUEST_DOMAIN_SEPARATOR: &[u8; 11] = b"\x0Aic-request";
@@ -104,8 +107,11 @@ pub fn sign(
     }
 }
 
-
-pub fn read_state_content(sender: Principal, paths: Vec<Vec<Label>>, ingress_expiry: u64) -> Result<ReadStateContent, AgentError> {
+pub fn read_state_content(
+    sender: Principal,
+    paths: Vec<Vec<Label>>,
+    ingress_expiry: u64,
+) -> Result<ReadStateContent, AgentError> {
     Ok(ReadStateContent::ReadStateRequest {
         sender,
         paths,
