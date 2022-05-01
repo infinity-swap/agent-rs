@@ -3,8 +3,9 @@ pub mod replica_api;
 pub mod signed;
 
 use crate::{
-    agent::replica_api::CallRequestContent,
+    agent::replica_api::{CallRequestContent, ReadStateContent},
     export::Principal,
+    hash_tree::Label,
     request_id::{to_request_id, RequestId},
 };
 pub use agent_error::AgentError;
@@ -101,4 +102,13 @@ pub fn sign(
             request_id,
         }),
     }
+}
+
+
+pub fn read_state_content(sender: Principal, paths: Vec<Vec<Label>>, ingress_expiry: u64) -> Result<ReadStateContent, AgentError> {
+    Ok(ReadStateContent::ReadStateRequest {
+        sender,
+        paths,
+        ingress_expiry,
+    })
 }
