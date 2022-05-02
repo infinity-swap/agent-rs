@@ -16,3 +16,6 @@ hex = "0.4.0"
 leb128 = "0.2.5"
 candid = "0.7.10"
 anyhow = "1.0.56"
+
+[dev-dependencies]
+serde_json = "1.0"
