@@ -1,3 +1,7 @@
+#[allow(clippy::all)]
+#[allow(dead_code)]
+mod bls;
+
 pub mod agent;
 pub mod export;
 pub mod request_id;
